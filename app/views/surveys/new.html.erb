@@ -1,0 +1,17 @@
+<%= form_for @survey do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %> <br />
+
+  <%= f.fields_for :questions do |q| %>
+    Questions<br/>
+    <%= q.text_field :title  %>
+    <br/>
+    Choices<br/>
+    <%= q.fields_for :choices do |c| %>
+      <%= c.text_field :value, :size => 4 %>
+      <%= c.text_field :description, :size => 6 %>/
+    <% end -%>
+    <br/>
+  <% end %>
+  <%= f.submit %>
+<% end -%>

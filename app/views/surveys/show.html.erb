@@ -1,0 +1,14 @@
+<h3><%= @survey.title %> </h3>
+<ul class ="span-6">
+<% @survey.questions.each do |question| %>
+   <li> <%=  question.title %></li>
+ <% question.choices.each do |choice| -%>
+   <%= content_tag :div,choice.value, :class => "left border" %>
+   <%= content_tag :div,choice.description, :class => "left border" %>
+ <% end -%>
+ <br/>
+<% end -%>
+</ul>
+
+ <br/>
+

@@ -1,0 +1,4 @@
+$("#result_content").html("<%= escape_javascript(render :partial => "results/result_content",
+                                                        :locals => {:graph => params[:id]} ) %>");
+$("#select_date_gap").html("<%= escape_javascript(insert_select_box(params[:id], @user)) %>");
+

@@ -1,0 +1,3 @@
+= form_tag('/results/send_email', :method => :get) do
+  Doctor's Email: #{email_field_tag :doctors_email}
+  = submit_tag "Send"

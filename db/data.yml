@@ -1,0 +1,80 @@
+survey:
+  -
+    groups:
+      -
+        id: 1
+        choices:
+          -
+            value: 0
+            description: "choice0_0"
+          -
+            value: 1
+            description: "choice0_1"
+          -
+            value: 2
+            description: "choice0_2"
+          -
+            value: 3
+            description: "choice0_3"
+          -
+            value: 4
+            description: "choice0_4"
+          -
+            value: 5
+            description: "choice0_5"
+          -
+             value: 6
+             description: "choice0_6"
+      -
+        id: 2
+        choices:
+          -
+            value: 0
+            description: "choice1_0"
+          -
+            value: 1
+            description: "choice1_1"
+          -
+            value: 2
+            description: "choice1_2"
+          -
+            value: 3
+            description: "choice1_3"
+          -
+            value: 4
+            description: "choice1_4"
+          -
+            value: 5
+            description: "choice1_5"
+          -
+            value: 6
+            description: "choice1_6"
+    questions:
+      -
+        group_id: 1
+        titles:
+          -
+            title: "question_01"
+          -
+            title: "question_02"
+          -
+            title: "question_03"
+          -
+            title: "question_04"
+          -
+            title: "question_05"
+          -
+            title: "question_06"
+      -
+        group_id: 2
+        titles:
+          -
+            title: "question_07"
+          -
+            title: "question_08"
+          -
+            title: "question_09"
+          -
+            title: "question_10"
+    survey_title: "title_1"
+    survey_description: "description_1_"

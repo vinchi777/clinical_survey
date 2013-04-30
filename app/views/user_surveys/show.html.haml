@@ -1,0 +1,42 @@
+Date Started:
+%u= @user_survey.starting_date.to_formatted_s(:long)
+%br
+  Next Schedule:
+  %u= @user_survey.next_schedule.to_formatted_s(:long)
+%br
+  %table
+    %tr
+      %td{:colspan => "8"}
+        %h2= t @survey.title, :locale => @user_survey.language
+    - @questions.each do |key,value|
+      - choices = Choice.find_all_by_group_id(key)
+      %tr
+        %td
+        - choices.each do |choice|
+          %td= t choice.description, :locale => @user_survey.language
+      - value.each do |question|
+        %tr
+          %td= t question.title, :locale => @user_survey.language
+          - choices.each do |choice|
+            - ans = (@ans.find_by_question_id(question.id)).pick == choice.value
+            %td
+              %span{:class => ans ? "picked" : nil }= choice.value
+  = hidden_field_tag :survey_id, @survey.id
+- if @user_survey.status.eql?("Complete")
+  CCQ Total Score:
+  = @ccq_total_score
+  %br
+  Symptom Score:
+  = @symptom
+  %br
+  Functional State Score:
+  = @functional_state
+  %br
+  Mental State Score:
+  = @mental_state
+- else
+  Please complete CCQ first to view scores!
+= link_to "Back", :back, :class => "clear right btn hide", :id => "back_btn"
+%div.clear.hide#options
+  = link_to "View", @user_survey, :class => "clear right btn", :id => "view"
+  = link_to "Edit", @user_survey, :class => "right btn", :id => "edit"

@@ -1,0 +1,30 @@
+Date Started:
+%u= @user_survey.starting_date.to_formatted_s(:long)
+%br
+  Next Schedule:
+  %u= @user_survey.next_schedule.to_formatted_s(:long)
+%br
+  = form_tag("/user_surveys/#{@user_survey.id}", :method => :put) do
+    %table
+      %tr
+        %td{:colspan => "8"}
+          %h2= t @survey.title, :locale => @user_survey.language
+      %tr
+        %td{:colspan => "8"}= t "#{@survey.description}#{@user_survey.version}", :locale => @user_survey.language
+      - @questions.each do |key,value|
+        - choices = Choice.find_all_by_group_id(key)
+        %tr
+          %td
+            - choices.each do |choice|
+              %td= t choice.description, :locale => @user_survey.language
+        - value.each do |question|
+          %tr
+            %td= t question.title, :locale => @user_survey.language
+            - choices.each do |choice|
+              - ans = (@ans.find_by_question_id(question.id)).pick == choice.value
+              %td
+                .radio
+                  = radio_button_tag "ans[#{question.id}][]", choice.value, ans, :id => "radio#{question.id}#{choice.value}"
+                  %label{:for => "radio#{question.id}#{choice.value}"}= choice.value
+    = hidden_field_tag :survey_id, @survey.id
+    = submit_tag "Update", :class => "btn right"

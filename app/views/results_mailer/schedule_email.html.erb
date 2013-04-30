@@ -1,0 +1,10 @@
+<html>
+  <body>
+    Surveys for Today
+    <ul>
+      <% @user_survey.each do |survey| %>
+        <li><%= survey.id %> - <%= t survey.survey.title, :locale => survey.language %> </li>
+      <% end %>
+    </ol>
+  </body>
+</html>

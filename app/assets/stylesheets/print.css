@@ -1,0 +1,21 @@
+@media print {
+  #user_nav, .space, #footer, .btn, .large_btn, #select_date_gap{
+    display: none;
+  }
+  .content, #page, .container{
+    box-shadow: none;
+    border: none;
+  }
+  #result_info{
+    display: block;
+    font-size: 1.5em;
+  }
+
+  #result_content{
+    -webkit-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    -o-transform:  scale(1.2);
+    -ms-transform: scale(1.2);
+  }
+
+}

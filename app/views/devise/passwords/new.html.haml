@@ -1,0 +1,10 @@
+.box_container.span-8
+  %h2.add_top.add_left Forgot your password?
+  = form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f|
+    = devise_error_messages!
+    %div
+      %div.span-1.add_top.add_left
+        = f.label :email
+      %div.span-6.last
+        = f.email_field :email, :placeholder => "Email"
+    %div= f.submit "Send me reset password instructions", :class => "btn"

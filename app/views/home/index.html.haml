@@ -1,0 +1,129 @@
+.box_container.span-5.left
+  %center
+    %hr.space
+    = link_to "New CCQ", surveys_path, :class => "btn"
+  - if @user_surveys
+    %center
+      %hr.space
+      %h3
+        - if @user_surveys.count != 0
+          All CCQs
+        - else
+          No CCQs
+    %center
+      %div
+        - @user_surveys.each do |user_survey|
+          .surveylink.small{:id => user_survey.id}
+            \#
+            = user_survey.id
+            = t user_survey.survey.title, :locale => user_survey.language
+            %br
+              = user_survey.starting_date.to_formatted_s(:long)
+            Status:
+            - status = user_survey.status
+            %label{:class => status.downcase }= status
+          %hr
+        = will_paginate @user_surveys
+#survey.small.span-17
+  .box_container.schedules
+    %h3
+      Today's Surveys:
+    - if @today.count != 0
+      %table{ :style => 'width: 100%;'}
+        %tr.stats_border
+          %td.sort{ :style => 'width: 6em;'}
+            \#
+          %td.sort
+            Survey
+          %td.sort
+            Version
+          %td.sort
+            Schedule Type
+          %td.sort
+            Status
+        - @today.each do |today|
+          %tr
+            %td
+              = today.id
+            %td
+              = link_to t(today.survey.title, :locale => today.language), edit_user_survey_path(today.id)
+            %td
+              = today.version
+            %td
+              = today.schedule.capitalize
+            %td
+              %label{:class => today.status.downcase}= today.status
+      = will_paginate @today, :param_name => :todays_page
+    - else
+      %center
+        %h4
+          No Surveys For Today
+  %hr.space
+  .box_container.schedules
+    %h3
+      Upcoming Surveys:
+    - if @schedules.count != 0
+      %table{ :style => 'width: 100%;'}
+        %tr.stats_border
+          %td.sort{ :style => 'width: 6em;'}
+            Previous Survey #
+          %td.sort
+            Survey
+          %td.sort
+            Version
+          %td.sort
+            Schedule Type
+          %td
+            = link_to "Schedule", root_path(:sort => 'by_next_schedule'), :class =>'sort'
+            = @symbol
+        - @schedules.each do |schedule|
+          %tr
+            %td
+              = schedule.id
+            %td
+              = t schedule.survey.title, :locale => schedule.language
+            %td
+              = schedule.version
+            %td
+              = schedule.schedule.capitalize
+            %td
+              = schedule.next_schedule.to_formatted_s(:long)
+      = will_paginate @schedules, :param_name => :schedule_page
+    - else
+      %center
+        %h4
+          No Upcoming Surveys
+  %hr.space
+  .box_container.schedules
+    %h3
+      Overdue Surveys:
+    - if @overdue.count != 0
+      %table{ :style => 'width: 100%;'}
+        %tr.stats_border
+          %td.sort{ :style => 'width: 6em;'}
+            \#
+          %td.sort
+            Survey
+          %td.sort
+            Version
+          %td.sort
+            Status
+          %td.sort
+            Deadline
+        - @overdue.each do |over|
+          %tr
+            %td
+              = over.id
+            %td
+              = link_to t(over.survey.title, :locale => over.language), edit_user_survey_path(over.id)
+            %td
+              = over.version
+            %td
+              %label{:class => over.status.downcase}= over.status
+            %td
+              = over.starting_date.to_formatted_s(:long)
+      = will_paginate @overdue, :param_name => :overdue_page
+    - else
+      %center
+        %h4
+          No Overdue Surveys

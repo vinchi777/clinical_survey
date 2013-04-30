@@ -1,0 +1,34 @@
+%br
+  = form_tag('/surveys', :method => :get) do
+    = select_tag :language, language_select_options(params[:locale])
+    = select_tag :version, version_select_options(params[:version])
+    = hidden_field_tag :survey_id, @survey.id
+    = submit_tag "Set", :class => "btn"
+  = form_tag('/user_surveys') do
+    .date_picker
+      = text_field_tag :starting_date, "#{Time.now.to_date.strftime('%d-%m-%Y')}",:class => "datepicker"
+    %table
+      %tr
+        %td{:colspan => "8"}
+          %h2= t @survey.title
+      %tr
+        %td{:colspan => "8"}= t "#{@survey.description}#{params[:version]}"
+      - @questions.each do |key,value|
+        - choices = Choice.find_all_by_group_id(key)
+        %tr
+          %td
+          - choices.each do |choice|
+            %td= t(choice.description)
+        - value.each do |question|
+          %tr
+            %td= t(question.title)
+            - choices.each do |choice|
+              - ans = !@ans.blank? ? (!@ans["#{question.id}"].nil?) ? @ans["#{question.id}"][0].eql?("#{choice.value}") : false : false
+              %td
+                .radio
+                  = radio_button_tag "ans[#{question.id}][]", choice.value, ans, :id => "radio#{question.id}#{choice.value}"
+                  %label{:for => "radio#{question.id}#{choice.value}"}= choice.value
+    = hidden_field_tag :language, params[:locale]
+    = hidden_field_tag :version, params[:version]
+    = hidden_field_tag :survey_id, @survey.id
+    = submit_tag "Save", :class => "btn right"

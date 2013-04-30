@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 1
+  survey_id: 1
+  schedule: 2012-05-10
+  status: MyString
+
+two:
+  user_id: 1
+  survey_id: 1
+  schedule: 2012-05-10
+  status: MyString

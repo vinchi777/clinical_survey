@@ -1,0 +1,12 @@
+== CCQ
+
+Online clinical survey for patients.
+
+== Getting Started
+
+- rename ccq.yml.sample to ccq.yml and input your credentials
+- rename database.yml.sample to database.yml
+- rake db:migrate
+- rake db:seed
+
+

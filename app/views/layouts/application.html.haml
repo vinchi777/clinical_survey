@@ -1,0 +1,18 @@
+!!!
+%html
+  %head
+    %title Ccq
+    = stylesheet_link_tag    "application", :media => "all"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+  %body
+    .container
+      = show_header
+      .content
+        = show_notice_alert(notice, alert)
+        %div#page
+          = yield
+        %hr.space
+          %hr
+            #footer.clear
+              %span.clear.right Copyright © 2012 CodrSchool.  All Rights Reserved.
